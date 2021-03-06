@@ -11,7 +11,6 @@ usersRoute.post("/register",asyncHandler( async (req,res)=>{
         const userExists =await User.findOne({email:email})
 
         if(userExists){
-            console.log('This represents userexists',userExists)
             throw new Error('User with given email already exists')
         }
         const createdUser =await User.create({name,email,password})
@@ -19,9 +18,23 @@ usersRoute.post("/register",asyncHandler( async (req,res)=>{
 }))
 
 // Login
-usersRoute.post('/login',(req,res)=>{
-    res.send('logging request made')
+usersRoute.post('/login',asyncHandler( async (req,res) => {
+
+    const {email,password} = req.body
+
+    const user= await User.findOne({email:email})
+
+    if(user){
+        res.status(200)
+        res.json({
+            id:user.id
+        })
+    }else{
+        res.status(401)
+        throw new Error('Invalid credentials')
+    }
 })
+)
 
 // update user
 usersRoute.put('/update',(req,res)=>{
