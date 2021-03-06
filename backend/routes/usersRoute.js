@@ -1,19 +1,22 @@
 const express=require('express')
 const User =require('../models/User')
+const asyncHandler = require('express-async-handler')
 const usersRoute=express.Router()
 
 
 // Register
-usersRoute.post("/register",async (req,res)=>{
-    try{
-        const {name,email,password} =req.body
-        const user =await User.create({name,email,password})
-        console.log(user)
-        res.send(user)
-    }catch(err) {
-        console.log(err) 
-    }
-})
+usersRoute.post("/register",asyncHandler( async (req,res)=>{
+    
+        const {name,email,password} = req.body
+        const userExists =await User.findOne({email:email})
+
+        if(userExists){
+            console.log('This represents userexists',userExists)
+            throw new Error('User with given email already exists')
+        }
+        const createdUser =await User.create({name,email,password})
+        res.send(createdUser)
+}))
 
 // Login
 usersRoute.post('/login',(req,res)=>{
