@@ -1,16 +1,27 @@
 require('dotenv').config()
 const express =require('express')
 const app= express()
-
+const User =require('./models/User')
 // DB Connect
 require('./config/dbConnect')()
+
+// parse body data
+app.use(express.json())
+
 
 // Routes
 // Users Routes
 
 // Register
-app.post("/api/users/register",(req,res)=>{
-res.send('register request made');
+app.post("/api/users/register",async (req,res)=>{
+    try{
+        const {name,email,password} =req.body
+        const user =await User.create({name,email,password})
+        console.log(user)
+        res.send(user)
+    }catch(err) {
+        console.log(err) 
+    }
 })
 
 // Login
@@ -36,6 +47,5 @@ app.get('/api/users',(req,res)=>{
 // Server
 const PORT = process.env.PORT || 5000
 app.listen(PORT , ()=>{
-    console.log('process.env',process.env)
     console.log('app is running on port '+ PORT)
 })
