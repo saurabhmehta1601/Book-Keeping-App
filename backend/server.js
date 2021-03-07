@@ -12,9 +12,14 @@ app.use(express.json())
 
 
 // Routes
-// Users Routes
+
+// User 
 const usersRoute=require('./routes/usersRoute')
 app.use('/api/users',usersRoute)
+
+// Books
+const booksRoute = require('./routes/bookRoutes')
+app.use('/api/books',booksRoute)
 
 // error handler middleware
 app.use(error.errorMiddlewareHandler)
