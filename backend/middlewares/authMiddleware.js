@@ -21,6 +21,6 @@ const authMiddleware =  asyncHandler( async (req,res,next) =>{
     }else{
         throw new Error('No authorization, token in headers')
     }
-})
+}) 
 
 module.exports=authMiddleware 
