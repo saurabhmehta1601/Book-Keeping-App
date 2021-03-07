@@ -19,7 +19,7 @@ const authMiddleware =  asyncHandler( async (req,res,next) =>{
             throw new Error('Not authorized, invalid token provided')
         }
     }else{
-        throw new Error('Not authrization token in headers')
+        throw new Error('No authorization, token in headers')
     }
 })
 

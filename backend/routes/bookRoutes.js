@@ -48,4 +48,16 @@ bookRouter.put('/:id',authMiddleware,expressAsyncHandler(async (req,res)=>{
     }
 }))
 
+bookRouter.delete('/:id',authMiddleware, expressAsyncHandler(async (req,res)=>{
+    try {
+        const book= await Book.findByIdAndDelete(req.params.id)
+        res.status(200)
+        res.send('Book is deleted ')
+    } catch (error) {
+        res.json(error)
+    }
+}))
+
+
+
 module.exports = bookRouter
