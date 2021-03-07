@@ -24,7 +24,7 @@ usersRoute.post('/login',asyncHandler( async (req,res) => {
 
     const user= await User.findOne({email:email})
 
-    if(user){
+    if(user && (await user.isPasswordMatch(password))){
         res.status(200)
         res.json({
             id:user.id

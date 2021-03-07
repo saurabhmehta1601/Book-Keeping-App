@@ -18,11 +18,21 @@ const UserSchema= new mongoose.Schema({
     }
 })
 
-// Middleware
+// Middlewares
+
+// hash password before saving in database
 UserSchema.pre('save', async function(next){
     const salt= await bcrypt.genSalt(10)
     this.password = await bcrypt.hash(this.password,salt) 
+    next()
 })
+
+// we can attach methods to schema
+// verify password
+UserSchema.methods.isPasswordMatch =async function(enteredPassword) {
+     return await bcrypt.compare(enteredPassword,this.password) 
+}
+
 
 const User =new mongoose.model('User',UserSchema)
 
