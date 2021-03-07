@@ -3,6 +3,7 @@ const User = require("../models/User");
 const asyncHandler = require("express-async-handler");
 const usersRoute = express.Router();
 const generateToken = require("../utils/generateToken");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 // Register
 usersRoute.post(
@@ -58,7 +59,8 @@ usersRoute.delete("/:id", (req, res) => {
 });
 
 // fetch users
-usersRoute.get("/", (req, res) => {
+usersRoute.get("/",authMiddleware, (req, res) => {
+ 
   res.send("fetched users");
 });
 
