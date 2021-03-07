@@ -1,6 +1,6 @@
 import {CREATE_BOOK_REQUEST,CREATE_BOOK_SUCCESS,CREATE_BOOK_FAIL} from '../../actions/actionTypes'
 
-export const createBookReducer =(state={},action) =>{
+ const createBookReducer =(state={},action) =>{
     switch (action.type) {
         case CREATE_BOOK_REQUEST:
             return ({
@@ -20,3 +20,5 @@ export const createBookReducer =(state={},action) =>{
             return state
     }
 }
+
+export {createBookReducer}
