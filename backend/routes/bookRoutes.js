@@ -1,5 +1,6 @@
 const express =require('express')
 const expressAsyncHandler =require('express-async-handler')
+const authMiddleware = require('../middlewares/authMiddleware')
 const Book =require('../models/Book')
 
 const bookRouter =express.Router()
@@ -31,7 +32,7 @@ bookRouter.get('/', expressAsyncHandler(async (req,res)=>{
 }))
 
 // 
-bookRouter.put('/:id',expressAsyncHandler(async (req,res)=>{
+bookRouter.put('/:id',authMiddleware,expressAsyncHandler(async (req,res)=>{
     const book=await Book.findById(req.params.id)
 
     if(book){
