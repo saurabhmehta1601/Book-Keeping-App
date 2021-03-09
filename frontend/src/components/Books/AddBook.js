@@ -1,10 +1,24 @@
 import React from 'react';
-
+import {useDispatch} from 'react-redux'
+import {createBookAction} from '../../redux/actions/books/bookactions'
 const AddBook = () => {
   //Get the user id from store
     const [author,setAuthor]=React.useState('')
     const [category,setCategory]=React.useState('')
     const [title,setTitle]=React.useState('')
+
+// dispatch
+const dispatch= useDispatch()
+
+    // Handle form submit
+
+    const handleFormSubmit= (e)=>{
+        e.preventDefault()
+        const data={
+            title,author,category
+        }
+        dispatch(createBookAction(data))
+    }
   return (
     <div className='row container-height'>
       <div className='col-lg-6 col-md-6 m-auto'>
@@ -25,13 +39,13 @@ const AddBook = () => {
             <div className='modal-dialog'>
               <div className='modal-content'>
                 <div className='modal-header'>
-                  <h5 className='modal-title' id='exampleModalLabel'>
+                  <h5 className='modal-title' id='exampleModalLabel' >
                     Create Book
                   </h5>
                 </div>
                 <div className='modal-body'>
                   <h1 className='text-center'>Add Book</h1>
-                  <form>
+                  <form onSubmit={handleFormSubmit}>
                     <fieldset>
                       <div className='form-group'>
                         <select value={category} onChange={(e) => setCategory(e.target.value)} className='custom-select'>
