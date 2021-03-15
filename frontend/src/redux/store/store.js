@@ -11,9 +11,18 @@ const reducer=combineReducers({
     bookCreated: createBookReducer,
     booksList:bookListReducer,
     userLogin: userAuthReducer
-
 })
 
-const store=createStore(reducer,composeWithDevTools(applyMiddleware(...middlewares)))
+// Get user from localStorage and storing in  state
+
+const userAuthFromStorage= localStorage.getItem('userAuthData') ? JSON.parse(localStorage.getItem('userAuthData') ) : null;
+
+const initialState={
+    userLogin: {
+        userInfo:{userAuthFromStorage}
+    }
+}
+
+const store=createStore(reducer,initialState,composeWithDevTools(applyMiddleware(...middlewares)))
 
 export {store}
