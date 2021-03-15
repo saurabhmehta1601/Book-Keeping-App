@@ -1,7 +1,7 @@
 import {USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS,USER_REGISTER_FAIL} from '../actionTypes'
 import axios from 'axios'
 
-export  const registerUserAction = (name,email,password)=>{
+const registerUserAction = (name,email,password)=>{
     return  async function dispatch() {
         try {
             dispatch({
@@ -33,3 +33,5 @@ export  const registerUserAction = (name,email,password)=>{
 
     }
 }
+
+export {registerUserAction}
