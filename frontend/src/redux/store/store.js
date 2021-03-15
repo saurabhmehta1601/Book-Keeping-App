@@ -8,7 +8,7 @@ const middlewares = [thunk]
 
 const reducer=combineReducers({
     bookCreated: createBookReducer,
-    bookList:bookListReducer
+    booksList:bookListReducer
 
 })
 
