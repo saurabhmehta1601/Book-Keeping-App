@@ -10,7 +10,7 @@ const middlewares = [thunk]
 const reducer=combineReducers({
     bookCreated: createBookReducer,
     booksList:bookListReducer,
-    userLogin: userAuthReducer
+    userLogin: userAuthReducer //for login and register
 })
 
 // Get user from localStorage and storing in  state
