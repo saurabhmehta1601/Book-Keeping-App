@@ -1,6 +1,10 @@
 import React from "react";
+import {useSelector} from "react-redux"
 import { Link } from "react-router-dom";
 const Navbar = () => {
+
+  const {userInfo} = useSelector(state => state.userLogin)
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -159,28 +163,25 @@ const Navbar = () => {
                   Users
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Logout
-                </Link>
-              </li>
+             
             </>
             {/* Login Register */}
             <>
-              <li className="nav-item">
+          {  !userInfo &&  <li className="nav-item">
                 <Link className="nav-link" to="/login">
                   Login
                 </Link>
-              </li>
-              <li className="nav-item">
+              </li>}
+
+           { !userInfo &&  <li className="nav-item">
                 <Link className="nav-link" to="/register">
                   Register
                 </Link>
-              </li>
+              </li>}
             </>
 
             {/* Drop dowm */}
-            {true ? (
+            {userInfo ? (
               <li className="nav-item dropdown">
                 <i
                   className="nav-link dropdown-toggle btn-dark"

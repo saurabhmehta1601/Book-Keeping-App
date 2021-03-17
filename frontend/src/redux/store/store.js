@@ -19,7 +19,7 @@ const userAuthFromStorage= localStorage.getItem('userAuthData') ? JSON.parse(loc
 
 const initialState={
     userLogin: {
-        userInfo:{userAuthFromStorage}
+        userInfo:userAuthFromStorage
     }
 }
 

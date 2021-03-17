@@ -21,12 +21,12 @@ const LoginUser = ({ history }) => {
   const loginUserSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(loginUserAction(email, password));
-    history.push("/profile");
+    
   };
 
   //Redirect
   useEffect(() => {
-    
+      if( userInfo )  history.push("/profile");
   }, [state]);
 
   return (
