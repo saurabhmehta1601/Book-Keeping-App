@@ -1,4 +1,4 @@
-import {USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS,USER_REGISTER_FAIL,USER_LOGIN_REQUEST,USER_LOGIN_SUCCESS,USER_LOGIN_FAIL} from '../actionTypes'
+import {USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS,USER_REGISTER_FAIL,USER_LOGIN_REQUEST,USER_LOGIN_SUCCESS,USER_LOGIN_FAIL,USER_LOGOUT_SUCCESS} from '../actionTypes'
 import axios from 'axios'
 
 const registerUserAction = (name,email,password)=>{
@@ -65,6 +65,19 @@ const loginUserAction = (email,password)=>{
     }
 }
 
+const logoutUserAction = ()=>{
+    return async dispatch =>{
+        try {
+            // Remove item from local storage
+            localStorage.removeItem('userAuthData')
 
+            dispatch({
+                type: USER_LOGOUT_SUCCESS,
+            })
+        } catch (error) {
+            
+        }
+    }
+} 
 
-export {registerUserAction,loginUserAction}
+export {registerUserAction,loginUserAction,logoutUserAction}

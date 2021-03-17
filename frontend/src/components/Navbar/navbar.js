@@ -1,9 +1,19 @@
 import React from "react";
-import {useSelector} from "react-redux"
-import { Link } from "react-router-dom";
+import {useSelector,useDispatch} from "react-redux"
+import { Link,useHistory } from "react-router-dom";
+import { logoutUserAction } from "../../redux/actions/users/usersActions";
+
+
 const Navbar = () => {
 
   const {userInfo} = useSelector(state => state.userLogin)
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const logoutHandler = ()=>{
+    dispatch(logoutUserAction())
+    history.push('/git')
+  }
 
   return (
     <header>
@@ -203,7 +213,7 @@ const Navbar = () => {
                   </Link>
 
                   <div className="dropdown-divider"></div>
-                  <button className="dropdown-item">Logout</button>
+                  <button className="dropdown-item" onClick={logoutHandler}>Logout</button>
                 </div>
               </li>
             ) : (

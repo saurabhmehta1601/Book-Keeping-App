@@ -1,4 +1,4 @@
-import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS } from "../../actions/actionTypes"
+import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS } from "../../actions/actionTypes"
 
 export const userAuthReducer =(state={},action) =>{
     switch(action.type){
@@ -30,6 +30,9 @@ export const userAuthReducer =(state={},action) =>{
                 error:action.payload,
                 loading:false
             }
+        
+        case USER_LOGOUT_SUCCESS:
+            return {}
          default:
             return state
     }
