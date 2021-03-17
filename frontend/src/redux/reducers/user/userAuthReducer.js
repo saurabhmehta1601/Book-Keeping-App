@@ -1,6 +1,5 @@
 import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS } from "../../actions/actionTypes"
 
-
 export const userAuthReducer =(state={},action) =>{
     switch(action.type){
 
@@ -10,7 +9,7 @@ export const userAuthReducer =(state={},action) =>{
             })
         case USER_REGISTER_SUCCESS:
             return {
-                userInfo:action.payload
+                userInfo:action.payload,
             }
         case USER_REGISTER_FAIL:
             return {

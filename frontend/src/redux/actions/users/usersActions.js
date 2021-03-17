@@ -2,7 +2,7 @@ import {USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS,USER_REGISTER_FAIL,USER_LOGI
 import axios from 'axios'
 
 const registerUserAction = (name,email,password)=>{
-    return  async function dispatch() {
+    return  async function (dispatch) {
         try {
             dispatch({
                 type: USER_REGISTER_REQUEST
@@ -24,6 +24,7 @@ const registerUserAction = (name,email,password)=>{
             })
             // save user login info in local storage
             localStorage.setItem('userAuthData',JSON.stringify(data))
+
         } catch (error) {
             dispatch({
                 type:USER_REGISTER_FAIL,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserAction } from "../../redux/actions/users/usersActions";
-// import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "../ErrorMessage";
 
 const LoginUser = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -21,11 +21,12 @@ const LoginUser = ({ history }) => {
   const loginUserSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(loginUserAction(email, password));
+    history.push("/profile");
   };
 
   //Redirect
   useEffect(() => {
-    if (userInfo) history.push("/profile");
+    
   }, [state]);
 
   return (
@@ -33,7 +34,7 @@ const LoginUser = ({ history }) => {
       <div className="col-lg-6 col-md-6 m-auto">
         <div className="container">
           {loading && <h1>Loading</h1>}
-          {/* {error && <ErrorMessage>{error}</ErrorMessage>} */}
+          {error && <ErrorMessage>{error}</ErrorMessage>}
           <form onSubmit={loginUserSubmitHandler}>
             <fieldset>
               <div className="form-group">
