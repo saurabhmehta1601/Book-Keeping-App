@@ -173,6 +173,12 @@ const Navbar = () => {
                   Users
                 </Link>
               </li>
+
+                <li className="nav-item">
+              {userInfo &&  <Link className="nav-link" to="/profile"> 
+                Profile
+                </Link>}
+              </li>
              
             </>
             {/* Login Register */}

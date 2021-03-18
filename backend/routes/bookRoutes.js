@@ -7,7 +7,14 @@ const bookRouter =express.Router()
 
 // Create Book
 bookRouter.post('/',authMiddleware, expressAsyncHandler(async (req,res)=>{
-    const book= await Book.create(req.body)
+    
+    const userId=req.user._id
+    const book= await Book.create({ 
+        title:req.body.title,
+        category:req.body.category,
+        createdBy: userId,
+        author: req.body.author
+    })
 
     if(book){
         res.status(200)
