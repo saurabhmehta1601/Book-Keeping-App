@@ -86,8 +86,6 @@ const getUserProfileAction = () =>{
     return async (dispatch,getState) =>{
         // grab token from store
         const {userInfo} = getState().userLogin
- 
-
         try {
             dispatch({
                 type:USER_PROFILE_REQUEST,
@@ -105,6 +103,7 @@ const getUserProfileAction = () =>{
                     type:USER_PROFILE_SUCCESS,
                     payload:data
                 })
+                
             } catch (error) {   
             dispatch({
                 type:USER_PROFILE_FAIL,

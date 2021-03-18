@@ -59,27 +59,29 @@ usersRoute.delete("/:id", (req, res) => {
 });
 
 // fetch users
-usersRoute.get("/",authMiddleware, (req, res) => {
+usersRoute.get("/", authMiddleware, (req, res) => {
   res.send("fetched users");
 });
 
+usersRoute.get(
+  "/profile",
+  authMiddleware,
+  asyncHandler(async (req, res) => {
+    try {
+      const user= await User.findById(req.user._id).populate('books')
+      
+      if (!user) {
+        throw new Error("You do not have any profile yet");
+        res.status(200);
+      }
 
-usersRoute.get('/profile',authMiddleware, asyncHandler(async (req, res)=>{
-  try {
-    const user= await User.findById(req.user._id).poopulate('books')
-   
-    
-    if(!user){
-      throw new Error('You do not have any profile yet')
-      res.status(200)
+      res.send(user);
+    } catch (error) {
+      res.status(500);
+      console.log("Error on server is ", error);
+      throw new Error("Internal Server error");
     }
-    res.send(user)
-    
-  } catch (error) {
-    res.send(500)   
-    throw new Error('Internal Server error') 
-  }
-}))
-
+  })
+);
 
 module.exports = usersRoute;

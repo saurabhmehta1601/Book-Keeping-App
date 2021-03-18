@@ -1,7 +1,10 @@
 import axios from 'axios'
+
 import {CREATE_BOOK_FAIL, CREATE_BOOK_REQUEST, CREATE_BOOK_SUCCESS,FETCH_USER_REQUEST,FETCH_BOOK_SUCCESS, FETCH_BOOK_FAIL} from '../actionTypes'
 
-const createBookAction =(bookData) =>{
+const createBookAction =({bookData,token}) =>{
+
+   
     return async (dispatch) =>{
         try {
             dispatch({
@@ -9,15 +12,21 @@ const createBookAction =(bookData) =>{
                 })
                 
                 const config={
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    headers:{
+                        authorization:`Bearer ${token}`
+                    }
                 }
-        
+
+               
+
                 const { data }=await axios.post('/api/books',bookData,config)
         
                 dispatch({
                     type:CREATE_BOOK_SUCCESS,
                     payload: data
                 })
+                
         } catch (error) {
             dispatch({
                 type:CREATE_BOOK_FAIL,

@@ -1,6 +1,7 @@
 import React from 'react';
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 import {createBookAction} from '../../redux/actions/books/bookactions'
+
 const AddBook = () => {
   //Get the user id from store
     const [author,setAuthor]=React.useState('')
@@ -9,15 +10,16 @@ const AddBook = () => {
 
 // dispatch
 const dispatch= useDispatch()
-
+const {userInfo} = useSelector(state =>state.userLogin)
     // Handle form submit
 
     const handleFormSubmit= (e)=>{
         e.preventDefault()
-        const data={
+        const bookData={
             title,author,category
         }
-        dispatch(createBookAction(data))
+        dispatch(createBookAction({bookData,token:userInfo.token}))
+     
     }
   return (
     <div className='row container-height'>
