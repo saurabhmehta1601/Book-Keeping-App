@@ -5,7 +5,7 @@ const bookSchema= new mongoose.Schema({
         type:String,
         required:[true,'Book category is required']
     },
-    author:{
+    author:{ 
         type:String,
         required:[true,'Book author is required']
     },

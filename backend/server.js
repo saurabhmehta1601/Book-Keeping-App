@@ -3,13 +3,14 @@ const express =require('express')
 const app= express()
 const User =require('./models/User')
 const error=require('./middlewares/errorMiddlewareHandler')
+const cors=require('cors')
 
 // DB Connect
 require('./config/dbConnect')()
 
 // parse body data
 app.use(express.json())
-
+app.use(cors())
 
 // Routes
 

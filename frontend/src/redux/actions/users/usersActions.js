@@ -47,8 +47,9 @@ const loginUserAction = (email,password)=>{
                     'Content-Type':'application/json'
                 }}
             
-
-            const {data} = await axios.post("/api/users/login",{email,password},config)
+                const {data} = await axios.post("/api/users/login",{email,password},config)
+                console.log(data)
+            
             dispatch({
                 type:USER_LOGIN_SUCCESS,
                 payload:data
@@ -85,11 +86,13 @@ const getUserProfileAction = () =>{
     return async (dispatch,getState) =>{
         // grab token from store
         const {userInfo} = getState().userLogin
+ 
 
         try {
             dispatch({
                 type:USER_PROFILE_REQUEST,
             })
+
             const config = {
                 headers:{
                     "authorization":`Bearer ${userInfo.token}`
@@ -97,6 +100,7 @@ const getUserProfileAction = () =>{
             }
                 // make a request
                 const {data} = await axios.get('/api/users/profile',config)
+              
                 dispatch({
                     type:USER_PROFILE_SUCCESS,
                     payload:data
