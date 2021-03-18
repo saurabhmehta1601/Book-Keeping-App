@@ -60,8 +60,25 @@ usersRoute.delete("/:id", (req, res) => {
 
 // fetch users
 usersRoute.get("/",authMiddleware, (req, res) => {
- 
   res.send("fetched users");
 });
 
 module.exports = usersRoute;
+
+usersRoute.get('/profile',authMiddleware, asyncHandler(async (req, res)=>{
+  try {
+    const user= await User.findById(req.user._id).poopulate('books')
+   
+
+    if(!user){
+      throw new Error('You do not have any profile yet')
+      res.status(200)
+    }
+    res.send(user)
+
+  } catch (error) {
+  res.send(500)   
+  throw new Error('Server error') 
+  }
+}))
+

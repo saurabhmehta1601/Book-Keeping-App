@@ -6,7 +6,7 @@ const Book =require('../models/Book')
 const bookRouter =express.Router()
 
 // Create Book
-bookRouter.post('/', expressAsyncHandler(async (req,res)=>{
+bookRouter.post('/',authMiddleware, expressAsyncHandler(async (req,res)=>{
     const book= await Book.create(req.body)
 
     if(book){

@@ -20,6 +20,14 @@ const UserSchema= new mongoose.Schema({
 
 // Middlewares
 
+UserSchema.virtual('books',{
+    ref:'Book',
+    foreignField: "addedBy",
+    localField:'_id'
+})
+
+UserSchema.set('toJSON',{virtuals:true})
+
 // hash password before saving in database
 UserSchema.pre('save', async function(next){
     const salt= await bcrypt.genSalt(10)

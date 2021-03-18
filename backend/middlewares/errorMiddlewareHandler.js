@@ -1,4 +1,4 @@
-const errorMiddlewareHandler = (err,req,res,next)=>{
+const errorMiddlewareHandler = (err,req,res)=>{
     // set status code   
    
    const errorStatusCode = res.statusCode===200 ? 500 : res.statusCode 
